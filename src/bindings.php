@@ -31,6 +31,7 @@ $container->bind('add_column_transformer', Marquine\Etl\Transformers\AddColumn::
 $container->bind('convert_boolean_transformer', Marquine\Etl\Transformers\ConvertBoolean::class);
 $container->bind('convert_district_transformer', Marquine\Etl\Transformers\ConvertDistrict::class);
 $container->bind('convert_encoding_transformer', Marquine\Etl\Transformers\ConvertEncoding::class);
+$container->bind('convert_withArray_transformer', Marquine\Etl\Transformers\ConvertWithArray::class);
 $container->bind('split_quarter_transformer', Marquine\Etl\Transformers\SplitQuarter::class);
 
 // Loaders
