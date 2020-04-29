@@ -26,6 +26,13 @@ $container->bind('trim_transformer', Marquine\Etl\Transformers\Trim::class);
 $container->bind('unique_rows_transformer', Marquine\Etl\Transformers\UniqueRows::class);
 $container->bind('replace_transformer', Marquine\Etl\Transformers\Replace::class);
 
+// Custom Transformers
+$container->bind('add_column_transformer', Marquine\Etl\Transformers\AddColumn::class);
+$container->bind('convert_boolean_transformer', Marquine\Etl\Transformers\ConvertBoolean::class);
+$container->bind('convert_district_transformer', Marquine\Etl\Transformers\ConvertDistrict::class);
+$container->bind('convert_encoding_transformer', Marquine\Etl\Transformers\ConvertEncoding::class);
+$container->bind('split_quarter_transformer', Marquine\Etl\Transformers\SplitQuarter::class);
+
 // Loaders
 $container->bind('insert_loader', Marquine\Etl\Loaders\Insert::class);
 $container->bind('insert_update_loader', Marquine\Etl\Loaders\InsertUpdate::class);

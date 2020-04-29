@@ -1,0 +1,45 @@
+<?php
+
+namespace Marquine\Etl\Transformers;
+
+use Marquine\Etl\Row;
+use InvalidArgumentException;
+
+class ConvertBoolean extends Transformer
+{
+    /**
+     * Transformer columns.
+     *
+     * @var array
+     */
+    protected $columns = [];
+
+    /**
+     * Properties that can be set via the options method.
+     *
+     * @var array
+     */
+    protected $availableOptions = [
+        'columns'
+    ];
+
+
+    /**
+     * Transform the given row.
+     *
+     * @param  \Marquine\Etl\Row  $row
+     * @return void
+     */
+    public function transform(Row $row)
+    {
+        $row->transform($this->columns, function ($column) {
+            if (true == filter_var($column, FILTER_VALIDATE_BOOLEAN)) {
+              return 'true';
+            }
+            else {
+              return 'false';
+            }
+        });
+    }
+
+}
