@@ -24,12 +24,20 @@ class ConvertWithArray extends Transformer
 
 
     /**
+     * Transformer dataArray.
+     *
+     * @var bool
+     */
+    protected $allowNull = false;
+
+
+    /**
      * Properties that can be set via the options method.
      *
      * @var array
      */
     protected $availableOptions = [
-        'column', 'dataArray'
+        'column', 'dataArray', 'allowNull'
     ];
 
 
@@ -41,12 +49,16 @@ class ConvertWithArray extends Transformer
      */
     public function transform(Row $row)
     {
-        if (!isset($this->dataArray[$row->get($this->column)])) {
+        if (!$this->allowNull && !isset($this->dataArray[$row->get($this->column)])) {
             throw new \Exception('Missing conversion value: ' . $row->get($this->column) . ' in dataArray for ConvertWithArray Transformer');
             exit;
-        }        
-
-        $row->set($this->column, $this->dataArray[$row->get($this->column)]);
+        }
+        elseif (!isset($this->dataArray[$row->get($this->column)])) {
+            $row->set($this->column, null);
+        }
+        else {
+            $row->set($this->column, $this->dataArray[$row->get($this->column)]);
+        }
     }
 
 }
