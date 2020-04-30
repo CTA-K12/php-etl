@@ -28,7 +28,7 @@ class ConvertWithArray extends Transformer
      *
      * @var bool
      */
-    protected $allowNull = false;
+    protected $nullable = false;
 
 
     /**
@@ -37,7 +37,7 @@ class ConvertWithArray extends Transformer
      * @var array
      */
     protected $availableOptions = [
-        'column', 'dataArray', 'allowNull'
+        'column', 'dataArray', 'nullable'
     ];
 
 
@@ -49,9 +49,11 @@ class ConvertWithArray extends Transformer
      */
     public function transform(Row $row)
     {
-        if (!$this->allowNull && !isset($this->dataArray[$row->get($this->column)])) {
-            throw new \Exception('Missing conversion value: ' . $row->get($this->column) . ' in dataArray for ConvertWithArray Transformer');
-            exit;
+        if (!$this->nullable && !isset($this->dataArray[$row->get($this->column)])) {
+            throw new \Exception(
+                "Missing conversion value for " . $this->column . " : '" . $row->get($this->column) .
+                "' in dataArray for ConvertWithArray Transformer\n\n"
+            );
         }
         elseif (!isset($this->dataArray[$row->get($this->column)])) {
             $row->set($this->column, null);
